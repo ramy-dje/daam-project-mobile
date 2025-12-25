@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Client Name -->
+        <TextView
+            android:id="@+id/review_client_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Client Name"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="#000000" />
+
+        <!-- Rating Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp">
+
+            <RatingBar
+                android:id="@+id/review_rating_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:rating="5"
+                android:isIndicator="true"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
+                android:transformPivotX="0dp"
+                android:transformPivotY="0dp" />
+
+            <TextView
+                android:id="@+id/review_rating_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5/5"
+                android:textSize="12sp"
+                android:textColor="#FF9800"
+                android:layout_marginStart="8dp" />
+
+        </LinearLayout>
+
+        <!-- Review Content -->
+        <TextView
+            android:id="@+id/review_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Review content goes here"
+            android:textSize="13sp"
+            android:textColor="#424242"
+            android:layout_marginTop="12dp"
+            android:lineSpacingExtra="4sp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
