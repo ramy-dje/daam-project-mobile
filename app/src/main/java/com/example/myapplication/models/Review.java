@@ -7,6 +7,7 @@ public class Review {
     private Product product;
     private String content;
     private int stars;
+    private String image;
 
     public Review() {
     }
@@ -17,6 +18,15 @@ public class Review {
         this.product = product;
         this.content = content;
         this.stars = stars;
+    }
+
+    public Review(int id, Client client, Product product, String content, int stars, String image) {
+        this.id = id;
+        this.client = client;
+        this.product = product;
+        this.content = content;
+        this.stars = stars;
+        this.image = image;
     }
 
     // Getters & Setters
@@ -58,5 +68,13 @@ public class Review {
 
     public void setStars(int stars) {
         this.stars = stars;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -9,7 +9,7 @@ public class Product implements Serializable {
     private String serialNumber;
     private String name;
     private String description;
-    private double price = 100;
+    private double price;
     private String image;
     private boolean isValid;
     private String locationName;

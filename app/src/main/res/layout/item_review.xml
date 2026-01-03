@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
+            android:gravity="fill_horizontal"
             android:layout_marginTop="8dp">
 
             <RatingBar
@@ -49,8 +49,7 @@
                 android:layout_height="wrap_content"
                 android:text="5/5"
                 android:textSize="12sp"
-                android:textColor="#FF9800"
-                android:layout_marginStart="8dp" />
+                android:textColor="#FF9800" />
 
         </LinearLayout>
 
@@ -64,6 +63,16 @@
             android:textColor="#424242"
             android:layout_marginTop="12dp"
             android:lineSpacingExtra="4sp" />
+
+        <!-- Review Image -->
+        <ImageView
+            android:id="@+id/review_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="12dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            android:contentDescription="Review image" />
 
     </LinearLayout>
 

@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,11 +12,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.myapplication.apis.ProductApi;
 import com.example.myapplication.apis.RetrofitProductClient;
 import com.example.myapplication.models.Product;
 import com.example.myapplication.models.Review;
 import com.example.myapplication.models.Seller;
+import com.example.myapplication.utils.ImageUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +31,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProductDetailActivity extends AppCompatActivity {
+
+    private static final String TAG = "ProductDetailActivity";
 
     private ImageView productImage;
     private TextView productName, productDesc, productPrice, productLocation;
@@ -96,11 +104,28 @@ public class ProductDetailActivity extends AppCompatActivity {
                     productLocation.setText(product.getLocationName() != null ? product.getLocationName() : "Unknown Location");
 
                     // Load product image
-                    if (product.getImage() != null && !product.getImage().isEmpty()) {
+                    String imageUrl = ImageUtils.buildImageUrl(product.getImage());
+                    Log.d(TAG, "Product image raw=" + product.getImage() + " resolved=" + imageUrl);
+                    if (imageUrl != null) {
                         Glide.with(ProductDetailActivity.this)
-                                .load(product.getImage())
+                                .load(imageUrl)
                                 .placeholder(R.drawable.logo)
                                 .error(R.drawable.logo)
+                                .listener(new RequestListener<android.graphics.drawable.Drawable>() {
+                                    @Override
+                                    public boolean onLoadFailed(GlideException e, Object model, Target<android.graphics.drawable.Drawable> target, boolean isFirstResource) {
+                                        if (e != null) {
+                                            Log.e(TAG, "Glide failed for " + model, e);
+                                        }
+                                        return false; // allow error placeholder
+                                    }
+
+                                    @Override
+                                    public boolean onResourceReady(android.graphics.drawable.Drawable resource, Object model, Target<android.graphics.drawable.Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                        Log.d(TAG, "Glide success for " + model + " from " + dataSource);
+                                        return false;
+                                    }
+                                })
                                 .into(productImage);
                     } else {
                         productImage.setImageResource(R.drawable.logo);

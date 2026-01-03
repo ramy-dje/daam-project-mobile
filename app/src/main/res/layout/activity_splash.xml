@@ -12,7 +12,7 @@
         android:id="@+id/splash_logo"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/logo"
+        android:src="@drawable/spalsh_image"
         android:scaleType="centerInside"
         android:contentDescription="BoltDZ Logo"
         app:layout_constraintBottom_toBottomOf="parent"

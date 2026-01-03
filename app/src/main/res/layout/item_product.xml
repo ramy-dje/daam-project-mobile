@@ -84,7 +84,7 @@
             </LinearLayout>
 
             <!-- Review Button Row (Bottom) -->
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_review"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -92,8 +92,10 @@
                 android:textSize="13sp"
                 android:padding="12dp"
                 android:layout_marginTop="12dp"
-                android:background="#36B9F0"
+                android:background="@drawable/button_blue_rounded"
                 android:textColor="#FFFFFF"
+                android:elevation="0dp"
+                android:stateListAnimator="@null"
                 android:visibility="gone" />
 
         </LinearLayout>

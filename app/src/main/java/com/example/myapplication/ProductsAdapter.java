@@ -13,7 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.myapplication.models.Product;
+import com.example.myapplication.utils.ImageUtils;
 
 import java.util.List;
 
@@ -62,12 +66,24 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.VH> {
         holder.price.setText(String.format("$%.2f", p.getPrice()));
         
         // Load image with Glide - fallback to logo if URL is invalid/empty
-        if (p.getImage() != null && !p.getImage().isEmpty()) {
+        String imageUrl = ImageUtils.buildImageUrl(p.getImage());
+        if (imageUrl != null) {
             Glide.with(holder.image.getContext())
-                    .load(p.getImage())
+                    .load(imageUrl)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(R.drawable.logo)
                     .error(R.drawable.logo)
+                    .listener(new RequestListener<android.graphics.drawable.Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(GlideException e, Object model, Target<android.graphics.drawable.Drawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(android.graphics.drawable.Drawable resource, Object model, Target<android.graphics.drawable.Drawable> target, com.bumptech.glide.load.DataSource dataSource, boolean isFirstResource) {
+                            return false;
+                        }
+                    })
                     .into(holder.image);
         } else {
             holder.image.setImageResource(R.drawable.logo);
